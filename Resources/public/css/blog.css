@@ -1,0 +1,14 @@
+.ck-content.ck-editor__editable {
+    border-bottom-color: #9e9e9e!important;
+    border-left: none!important;
+    border-right: none!important;
+    background-color: transparent!important;
+}
+
+.ck-content.ck-editor__editable.ck-focused:focus {
+    border-bottom-color: #26a69a!important;
+    box-shadow: 0 1px 0 0 #26a69a!important;
+}
+.ck.ck-editor {
+    margin-bottom: 30px!important;
+}

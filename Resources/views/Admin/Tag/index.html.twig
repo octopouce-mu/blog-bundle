@@ -1,0 +1,41 @@
+{% extends '@OctopouceBlog/Admin/layout.html.twig' %}
+
+{% block title %}Tags - {{ parent() }}{% endblock %}
+
+{% block main %}
+    <div class="padding-filter">
+        <div class="row title">
+            <div class="col s12">
+                <h1>Tags <a href="{{ path('octopouce_blog_admin_tag_create') }}" class="waves-effect waves-light btn green"><i class="fas fa-plus"></i></a></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Slug</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tag in tags %}
+                            <tr>
+                                <td>{{ tag.id }}</td>
+                                <td>{{ tag.name }}</td>
+                                <td>{{ tag.slug }}</td>
+                                <td>
+                                    <a href="{{ path('octopouce_blog_admin_tag_edit', {'tag':tag.id}) }}" class="waves-effect waves-light btn orange"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="{{ path('octopouce_blog_admin_tag_delete', {'tag':tag.id}) }}" class="waves-effect waves-light btn red"><i class="fas fa-times"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
