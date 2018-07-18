@@ -6,7 +6,7 @@
     {% form_theme form '@OctopouceAdmin/Form/layout.html.twig' %}
 {% endif %}
 
-{% block siderbar_left_nav %}
+{% block sidebar_left_nav %}
     {% if is_granted('ROLE_BLOG') %}
         <ul>
             <li class="current">
@@ -38,5 +38,5 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="https://cdn.ckeditor.com/ckeditor5/10.1.0/classic/ckeditor.js"></script>
-    <script src="{{ asset('bundles/octopouceblog/js/blog.js') }}"></script>
+    <script src="{{ asset('bundles/octopouceblog/js/cms.js') }}"></script>
 {% endblock %}

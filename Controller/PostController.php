@@ -38,7 +38,7 @@ class PostController extends Controller
 	public function show(Post $post) : Response {
 
 		if(!$post->isEnabled()){
-			$this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+			$this->denyAccessUnlessGranted(['ROLE_ADMIN', 'ROLE_BLOG'], null, 'Unable to access this page!');
 		}
 
 		return $this->render('@OctopouceBlog/Post/show.html.twig', [
