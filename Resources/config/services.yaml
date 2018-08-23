@@ -5,14 +5,3 @@ services:
         autowire: true
         autoconfigure: true
         public: false
-
-    Octopouce\BlogBundle\Utils\FileUploader:
-        arguments:
-            $targetDirectory: '/uploads'
-
-    Octopouce\BlogBundle\EventListener\PostUploadListener:
-        autowire: true
-        tags:
-            - { name: doctrine.event_listener, event: postPersist }
-            - { name: doctrine.event_listener, event: preUpdate }
-            - { name: doctrine.event_listener, event: postLoad }

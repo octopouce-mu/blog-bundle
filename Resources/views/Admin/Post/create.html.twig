@@ -9,14 +9,118 @@
                 <h1>Create post</h1>
             </div>
         </div>
+        {{ form_start(form) }}
         <div class="row">
-            <div class="col s12">
+            <div class="col s9">
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="tabs transparent">
+                            <li class="tab col s3"><a href="#post" class="active">Post</a></li>
+                            <li class="tab col s3"><a href="#seo">SEO</a></li>
+                        </ul>
+                    </div>
+                    <div id="post" class="col s12">
+                        <div class="box">
+                            <div class="content">
+                                {{ form_row(form.title) }}
+                                {{ form_row(form.slug) }}
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="content">
+                                {{ form_row(form.content) }}
+                                <div class="row">
+                                    <div class="col s12">
+                                        <div class="sliders">
+                                            <ul>
+                                                <li class="add-slide">
+                                                    <button type="button"><i class="fas fa-plus"></i></button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="seo" class="col s12">
+                        <div class="box">
+                            <div class="content">
+                                {{ form_row(form.seoTitle) }}
+                                {{ form_row(form.seoDescription) }}
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="content">
+                                {{ form_row(form.seoFacebookTitle) }}
+                                {{ form_row(form.seoFacebookDescription) }}
+                                {{ form_row(form.seoFacebookImage) }}
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="content">
+                                {{ form_row(form.seoTwitterTitle) }}
+                                {{ form_row(form.seoTwitterDescription) }}
+                                {{ form_row(form.seoTwitterImage) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col s3">
                 <div class="box">
                     <div class="content">
-                        {{ form(form) }}
+                        {{ form_row(form.enabled) }}
+                        {{ form_row(form.publishedAt) }}
+                        {{ form_row(form.user) }}
+                        {{ form_row(form.submit) }}
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="content">
+                        {{ form_row(form.categories) }}
+                        {{ form_row(form.tags) }}
                     </div>
                 </div>
             </div>
         </div>
+        {{ form_end(form) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <div id="add-slide-modal" class="modal modal-fixed-footer sliders-modal" tabindex="0">
+        <form class="form-slide" name="form-slide" method="post" enctype="multipart/form-data">
+            <div class="modal-content"><h4>Add slide</h4>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="title" type="text" class="validate" required="" name="title">
+                        <label for="title">Title</label></div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="description" type="text" class="validate" name="description">
+                        <label for="description">Description</label></div>
+                </div>
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file" required="" name="file"></div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Upload one file" name="file-text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 img-show"></div>
+                </div>
+            </div>
+            <div class="modal-footer"><input type="hidden" name="edit">
+                <button type="submit" class="btn waves-effect waves-green">Add</button>
+            </div>
+        </form>
+    </div>
+    {{ parent() }}
 {% endblock %}

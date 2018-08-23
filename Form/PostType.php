@@ -52,14 +52,38 @@ class PostType extends AbstractType
 			->add('content', TextareaType::class, [
 				'attr' => ['class' => 'editor']
 			])
-			->add('image', FileType::class, [
-				'required' => false
-			])
 
 			->add('enabled', SwitchType::class, [
 				'required' => false
 			])
 			->add('publishedAt', DateTimePickerType::class)
+
+			->add('seoTitle', TextType::class, [
+				'required' => false
+			])
+			->add('seoDescription', TextType::class, [
+				'required' => false
+			])
+
+			->add('seoFacebookTitle', TextType::class, [
+				'required' => false
+			])
+			->add('seoFacebookDescription', TextType::class, [
+				'required' => false
+			])
+			->add('seoFacebookImage', FileType::class, [
+				'required' => false
+			])
+
+			->add('seoTwitterTitle', TextType::class, [
+				'required' => false
+			])
+			->add('seoTwitterDescription', TextType::class, [
+				'required' => false
+			])
+			->add('seoTwitterImage', FileType::class, [
+				'required' => false
+			])
 
 			->add('categories', EntityType::class,[
 				'multiple' => true,
@@ -71,7 +95,7 @@ class PostType extends AbstractType
 					          ->orderBy('c.name', 'ASC');
 				},
 				'required' => false,
-				'attr' => ['data-increment' => 'true']
+				'attr' => ['data-increment' => 'true', 'class'=>'select2']
 			])
 
 			->add('tags', EntityType::class,[
@@ -82,14 +106,14 @@ class PostType extends AbstractType
 					          ->orderBy('t.name', 'ASC');
 				},
 				'required' => false,
-				'attr' => ['data-increment' => 'true']
+				'attr' => ['data-increment' => 'true', 'class'=>'select2']
 			])
 
 			->add('user', EntityType::class,[
 				'multiple' => false,
 				'class' => User::class,
 				'required' => false,
-				'attr' => ['placeholder' => 'Choose a user']
+				'placeholder' => 'Choose a user'
 			])
 
 			->add('submit', SubmitType::class, [

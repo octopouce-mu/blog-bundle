@@ -6,6 +6,7 @@ use App\Entity\Account\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Octopouce\AdminBundle\Entity\Category;
+use Octopouce\AdminBundle\Entity\File;
 
 /**
  * Ad
@@ -41,16 +42,9 @@ class Post
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="content", type="text")
+	 * @ORM\Column(name="content", type="text", nullable=true)
 	 */
 	protected $content;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="image", type="string", length=255, nullable=true)
-	 */
-	protected $image;
 
 	/**
 	 * @var bool
@@ -72,6 +66,62 @@ class Post
 	 * @ORM\Column(name="created_at", type="datetime")
 	 */
 	protected $createdAt;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="seo_title", type="string", length=255, nullable=true)
+	 */
+	protected $seoTitle;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="seo_description", type="string", length=255, nullable=true)
+	 */
+	protected $seoDescription;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="seo_facebook_title", type="string", length=255, nullable=true)
+	 */
+	protected $seoFacebookTitle;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="seo_facebook_description", type="string", length=255, nullable=true)
+	 */
+	protected $seoFacebookDescription;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="seo_facebook_image", type="string", length=255, nullable=true)
+	 */
+	protected $seoFacebookImage;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="seo_twitter_title", type="string", length=255, nullable=true)
+	 */
+	protected $seoTwitterTitle;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="seo_twitter_description", type="string", length=255, nullable=true)
+	 */
+	protected $seoTwitterDescription;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="seo_twitter_image", type="string", length=255, nullable=true)
+	 */
+	protected $seoTwitterImage;
 
 	/**
 	 * @var User
@@ -97,6 +147,14 @@ class Post
 	private $tags;
 
 	/**
+	 * @ORM\ManyToMany(targetEntity="Octopouce\AdminBundle\Entity\File")
+	 * @ORM\JoinTable(name="blog_post_file",
+	 *     joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
+	 *     inverseJoinColumns={@ORM\JoinColumn(name="file_id", referencedColumnName="id")})
+	 */
+	private $images;
+
+	/**
 	 * Post constructor.
 	 */
 	public function __construct() {
@@ -105,6 +163,7 @@ class Post
 		$this->createdAt   = new \DateTime('now');
 		$this->categories = new ArrayCollection();
 		$this->tags = new ArrayCollection();
+		$this->images = new ArrayCollection();
 	}
 
 
@@ -191,30 +250,6 @@ class Post
 	}
 
 	/**
-	 * Set image
-	 *
-	 * @param string $image
-	 *
-	 * @return Post
-	 */
-	public function setImage($image)
-	{
-		$this->image = $image;
-
-		return $this;
-	}
-
-	/**
-	 * Get image
-	 *
-	 * @return string
-	 */
-	public function getImage()
-	{
-		return $this->image;
-	}
-
-	/**
 	 * @return bool
 	 */
 	public function isEnabled(): bool {
@@ -269,6 +304,143 @@ class Post
 
 		return $this;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getSeoTitle() {
+		return $this->seoTitle;
+	}
+
+	/**
+	 * @param string $seoTitle
+	 * @return Post
+	 */
+	public function setSeoTitle($seoTitle ) {
+		$this->seoTitle = $seoTitle;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSeoDescription() {
+		return $this->seoDescription;
+	}
+
+	/**
+	 * @param string $seoDescription
+	 * @return Post
+	 */
+	public function setSeoDescription($seoDescription ) {
+		$this->seoDescription = $seoDescription;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSeoFacebookTitle() {
+		return $this->seoFacebookTitle;
+	}
+
+	/**
+	 * @param string $seoFacebookTitle
+	 * @return Post
+	 */
+	public function setSeoFacebookTitle($seoFacebookTitle ) {
+		$this->seoFacebookTitle = $seoFacebookTitle;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSeoFacebookDescription() {
+		return $this->seoFacebookDescription;
+	}
+
+	/**
+	 * @param string $seoFacebookDescription
+	 * @return Post
+	 */
+	public function setSeoFacebookDescription($seoFacebookDescription ) {
+		$this->seoFacebookDescription = $seoFacebookDescription;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSeoFacebookImage() {
+		return $this->seoFacebookImage;
+	}
+
+	/**
+	 * @param string $seoFacebookImage
+	 * @return Post
+	 */
+	public function setSeoFacebookImage($seoFacebookImage ) {
+		$this->seoFacebookImage = $seoFacebookImage;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSeoTwitterTitle() {
+		return $this->seoTwitterTitle;
+	}
+
+	/**
+	 * @param string $seoTwitterTitle
+	 * @return Post
+	 */
+	public function setSeoTwitterTitle($seoTwitterTitle ) {
+		$this->seoTwitterTitle = $seoTwitterTitle;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSeoTwitterDescription() {
+		return $this->seoTwitterDescription;
+	}
+
+	/**
+	 * @param string $seoTwitterDescription
+	 * @return Post
+	 */
+	public function setSeoTwitterDescription($seoTwitterDescription ) {
+		$this->seoTwitterDescription = $seoTwitterDescription;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSeoTwitterImage() {
+		return $this->seoTwitterImage;
+	}
+
+	/**
+	 * @param string $seoTwitterImage
+	 * @return Post
+	 */
+	public function setSeoTwitterImage($seoTwitterImage ) {
+		$this->seoTwitterImage = $seoTwitterImage;
+
+		return $this;
+	}
+
 
 	/**
 	 * @return User
@@ -351,5 +523,38 @@ class Post
 	public function removeTag(Tag $tag)
 	{
 		return $this->tags->removeElement($tag);
+	}
+
+	/**
+	 * @return ArrayCollection
+	 */
+	public function getImages() {
+		return $this->images;
+	}
+
+	/**
+	 * Add tag.
+	 *
+	 * @param File $image
+	 *
+	 * @return Post
+	 */
+	public function addImage(File $image)
+	{
+		$this->images[] = $image;
+
+		return $this;
+	}
+
+	/**
+	 * Remove image.
+	 *
+	 * @param File $image
+	 *
+	 * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+	 */
+	public function removeImage(File $image)
+	{
+		return $this->images->removeElement($image);
 	}
 }

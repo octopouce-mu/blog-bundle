@@ -13,7 +13,7 @@
             {% for post in posts %}
                 <div class="col s6 m3 l3">
                     <div class="box">
-                        {% if post.image %}<div class="bg-img" style="background-image: url('{{ asset(post.image.pathname) }}');"></div>{% endif %}
+                        {% if post.images|length > 0 %}<div class="bg-img" style="background-image: url('{{ asset(post.images[0].pathname) }}');"></div>{% endif %}
                         <a href="{{ path('octopouce_blog_admin_post_edit', {'post':post.id}) }}" class="title">{{ post.title }}</a>
                         <div class="content">
                             {{ post.content|raw|truncate(20) }}
