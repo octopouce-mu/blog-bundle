@@ -1,4 +1,4 @@
 octopouce_blog_admin:
     resource: '../../Controller/Admin'
     type: annotation
-    prefix: /blog
+    prefix: /admin/blog
