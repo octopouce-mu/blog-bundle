@@ -50,7 +50,8 @@ class PostType extends AbstractType
 				'attr' => ['placeholder' => '']
 			])
 			->add('content', TextareaType::class, [
-				'attr' => ['class' => 'editor']
+				'attr' => ['class' => 'editor'],
+				'required' => false
 			])
 
 			->add('enabled', SwitchType::class, [
