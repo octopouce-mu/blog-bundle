@@ -146,24 +146,23 @@ class Post
 	 */
 	private $tags;
 
+
 	/**
-	 * @ORM\ManyToMany(targetEntity="Octopouce\AdminBundle\Entity\File")
-	 * @ORM\JoinTable(name="blog_post_file",
-	 *     joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
-	 *     inverseJoinColumns={@ORM\JoinColumn(name="file_id", referencedColumnName="id")})
+	 * @var File
+	 *
+	 * @ORM\ManyToOne(targetEntity="Octopouce\AdminBundle\Entity\File", cascade={"persist", "remove"})
 	 */
-	private $images;
+	private $image;
 
 	/**
 	 * Post constructor.
 	 */
 	public function __construct() {
-		$this->enabled     = false;
+		$this->enabled     = true;
 		$this->publishedAt = new \DateTime('now');
 		$this->createdAt   = new \DateTime('now');
 		$this->categories = new ArrayCollection();
 		$this->tags = new ArrayCollection();
-		$this->images = new ArrayCollection();
 	}
 
 
@@ -525,36 +524,15 @@ class Post
 		return $this->tags->removeElement($tag);
 	}
 
-	/**
-	 * @return ArrayCollection
-	 */
-	public function getImages() {
-		return $this->images;
+	public function getImage(): ?File
+	{
+		return $this->image;
 	}
 
-	/**
-	 * Add tag.
-	 *
-	 * @param File $image
-	 *
-	 * @return Post
-	 */
-	public function addImage(File $image)
+	public function setImage( ?File $image ): self
 	{
-		$this->images[] = $image;
+		$this->image = $image;
 
 		return $this;
-	}
-
-	/**
-	 * Remove image.
-	 *
-	 * @param File $image
-	 *
-	 * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-	 */
-	public function removeImage(File $image)
-	{
-		return $this->images->removeElement($image);
 	}
 }

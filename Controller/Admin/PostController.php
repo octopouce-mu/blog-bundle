@@ -6,10 +6,13 @@
 
 namespace Octopouce\BlogBundle\Controller\Admin;
 
+use Octopouce\AdminBundle\Utils\FileUploader;
 use Octopouce\BlogBundle\Entity\Post;
 use Octopouce\BlogBundle\Form\PostType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,7 +46,7 @@ class PostController extends Controller
 	/**
 	 * @Route("/create", name="octopouce_blog_admin_post_create")
 	 */
-	public function create(Request $request) : Response {
+	public function create(Request $request, FileUploader $fileUploader) : Response {
 		$em = $this->getDoctrine()->getManager();
 
 		$post = new Post();
@@ -54,6 +57,17 @@ class PostController extends Controller
 
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
+
+			$now = new \DateTime();
+			$path = 'uploads/'.$now->format('Y/m');
+
+			$fileSystem = new Filesystem();
+			$fileSystem->mkdir($path, 0777);
+
+			if($post->getImage()) {
+				$nameImage = $fileUploader->upload($post->getImage()->getPath(), $path, 'post-'.$post->getSlug());
+				$post->getImage()->setPath($path.'/'.$nameImage);
+			}
 
 			$em->persist($post);
 			$em->flush();
@@ -69,7 +83,7 @@ class PostController extends Controller
 	/**
 	 * @Route("/{post}/edit", name="octopouce_blog_admin_post_edit")
 	 */
-	public function edit(Post $post, Request $request) : Response {
+	public function edit(Post $post, Request $request, FileUploader $fileUploader) : Response {
 
 		$form = $this->createForm(PostType::class, $post);
 
@@ -78,8 +92,20 @@ class PostController extends Controller
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
 
+			$now = new \DateTime();
+			$path = 'uploads/'.$now->format('Y/m');
 
-			if(!$post->getImage() && $imgOld) $post->setImage($imgOld->getFileName());
+			$fileSystem = new Filesystem();
+
+			if($post->getImage()) {
+				if($imgOld && $imgOld->getPath() instanceof File) $fileSystem->remove($imgOld);
+				$fileSystem->mkdir($path, 0777);
+
+				$nameImage = $fileUploader->upload($post->getImage()->getPath(), $path, 'post-'.$post->getSlug());
+				$post->getImage()->setPath($path.'/'.$nameImage);
+			} else {
+				$post->getImage()->setPath($imgOld->getPath() instanceof File ? $imgOld->getPath()->getPathName() : $imgOld->getPath());
+			}
 
 			$this->getDoctrine()->getManager()->flush();
 
@@ -99,6 +125,12 @@ class PostController extends Controller
 	 */
 	public function delete(Post $post) : Response {
 		$em = $this->getDoctrine()->getManager();
+
+		$fileSystem = new Filesystem();
+		if($post->getImage()->getPath() instanceof File) {
+			$fileSystem->remove($post->getImage()->getPath()->getPathName());
+		}
+
 		$em->remove($post);
 		$em->flush();
 
