@@ -64,7 +64,7 @@ class PostController extends Controller
 			}
 
 			if($post->getThumbnail()) {
-				$nameThumbnail = $fileUploader->upload($post->getThumbnail(), 'date', $post->getSlug().'-thumbnail');
+				$nameThumbnail = $fileUploader->upload($post->getThumbnail(), 'date', 'post-'.$post->getSlug().'-thumbnail');
 				$post->setThumbnail($nameThumbnail);
 			}
 
@@ -98,7 +98,7 @@ class PostController extends Controller
 			if($post->getThumbnail()) {
 				if($oldThumbnail instanceof File) $fileSystem->remove($oldThumbnail);
 
-				$nameThumbnail = $fileUploader->upload($post->getThumbnail(), 'date', $post->getSlug().'-thumbnail');
+				$nameThumbnail = $fileUploader->upload($post->getThumbnail(), 'date', 'post-'.$post->getSlug().'-thumbnail');
 				$post->setThumbnail($nameThumbnail);
 			} else {
 				$post->setThumbnail($oldThumbnail instanceof File ? $oldThumbnail->getPathName() : $oldThumbnail);
