@@ -63,6 +63,11 @@ class PostController extends Controller
 				$post->getImage()->setPath($nameImage);
 			}
 
+			if($post->getThumbnail()) {
+				$nameThumbnail = $fileUploader->upload($post->getThumbnail(), 'date', $post->getSlug().'-thumbnail');
+				$post->setThumbnail($nameThumbnail);
+			}
+
 			$em->persist($post);
 			$em->flush();
 
@@ -82,11 +87,22 @@ class PostController extends Controller
 		$form = $this->createForm(PostType::class, $post);
 
 		$imgOld = $post->getImage();
+		$oldThumbnail = $post->getThumbnail();
+
 
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
 
 			$fileSystem = new Filesystem();
+
+			if($post->getThumbnail()) {
+				if($oldThumbnail instanceof File) $fileSystem->remove($oldThumbnail);
+
+				$nameThumbnail = $fileUploader->upload($post->getThumbnail(), 'date', $post->getSlug().'-thumbnail');
+				$post->setThumbnail($nameThumbnail);
+			} else {
+				$post->setThumbnail($oldThumbnail instanceof File ? $oldThumbnail->getPathName() : $oldThumbnail);
+			}
 
 			if($post->getImage()) {
 				if($imgOld && $imgOld->getPath() instanceof File) $fileSystem->remove($imgOld);
@@ -119,6 +135,10 @@ class PostController extends Controller
 		$fileSystem = new Filesystem();
 		if($post->getImage()->getPath() instanceof File) {
 			$fileSystem->remove($post->getImage()->getPath()->getPathName());
+		}
+
+		if($post->getThumbnail() instanceof File) {
+			$fileSystem->remove($post->getThumbnail()->getPathName());
 		}
 
 		$em->remove($post);

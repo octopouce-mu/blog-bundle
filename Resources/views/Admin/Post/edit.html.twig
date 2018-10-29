@@ -109,6 +109,14 @@
                 </div>
                 <div class="box">
                     <div class="content">
+                        {% if post.thumbnail %}
+                            <img src="{{ asset(post.thumbnail.pathname) }}" alt="" width="100%">
+                        {% endif %}
+                        {{ form_row(form.thumbnail) }}
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="content">
                         <a href="{{ path('octopouce_blog_admin_post_delete', {'post':post.id}) }}" class="btn btn-block red">Delete</a>
                     </div>
                 </div>

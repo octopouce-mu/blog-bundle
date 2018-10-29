@@ -124,6 +124,11 @@ class Post
 	protected $seoTwitterImage;
 
 	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $thumbnail;
+
+	/**
 	 * @var User
 	 *
 	 * @ORM\ManyToOne(targetEntity="App\Entity\Account\User")
@@ -532,6 +537,18 @@ class Post
 	public function setImage( ?File $image ): self
 	{
 		$this->image = $image;
+
+		return $this;
+	}
+
+	public function getThumbnail()
+	{
+		return $this->thumbnail;
+	}
+
+	public function setThumbnail($thumbnail): self
+	{
+		$this->thumbnail = $thumbnail;
 
 		return $this;
 	}

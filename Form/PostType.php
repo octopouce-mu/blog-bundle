@@ -120,6 +120,11 @@ class PostType extends AbstractType
 			])
 
 			->add('image', FileEntityType::class,[
+				'required' => false
+			])
+
+			->add('thumbnail', FileType::class,[
+				'required' => false
 			])
 
 			->add('submit', SubmitType::class, [
