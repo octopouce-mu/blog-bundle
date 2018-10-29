@@ -58,15 +58,9 @@ class PostController extends Controller
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
 
-			$now = new \DateTime();
-			$path = 'uploads/'.$now->format('Y/m');
-
-			$fileSystem = new Filesystem();
-			$fileSystem->mkdir($path, 0777);
-
 			if($post->getImage()) {
-				$nameImage = $fileUploader->upload($post->getImage()->getPath(), $path, 'post-'.$post->getSlug());
-				$post->getImage()->setPath($path.'/'.$nameImage);
+				$nameImage = $fileUploader->upload($post->getImage()->getPath(), 'date', 'post-'.$post->getSlug());
+				$post->getImage()->setPath($nameImage);
 			}
 
 			$em->persist($post);
@@ -92,17 +86,13 @@ class PostController extends Controller
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
 
-			$now = new \DateTime();
-			$path = 'uploads/'.$now->format('Y/m');
-
 			$fileSystem = new Filesystem();
 
 			if($post->getImage()) {
 				if($imgOld && $imgOld->getPath() instanceof File) $fileSystem->remove($imgOld);
-				$fileSystem->mkdir($path, 0777);
 
-				$nameImage = $fileUploader->upload($post->getImage()->getPath(), $path, 'post-'.$post->getSlug());
-				$post->getImage()->setPath($path.'/'.$nameImage);
+				$nameImage = $fileUploader->upload($post->getImage()->getPath(), 'date', 'post-'.$post->getSlug());
+				$post->getImage()->setPath($nameImage);
 			} else {
 				$post->getImage()->setPath($imgOld->getPath() instanceof File ? $imgOld->getPath()->getPathName() : $imgOld->getPath());
 			}
