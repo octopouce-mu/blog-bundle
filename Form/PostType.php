@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Octopouce\AdminBundle\Entity\Category;
 use Octopouce\AdminBundle\Entity\File;
+use Octopouce\AdminBundle\Form\FileEntityType;
 use Octopouce\AdminBundle\Form\Type\DateTimePickerType;
 use Octopouce\AdminBundle\Form\Type\SwitchType;
 use Octopouce\BlogBundle\Entity\Post;
@@ -118,7 +119,7 @@ class PostType extends AbstractType
 				'placeholder' => 'Choose a user'
 			])
 
-			->add('image', \Octopouce\AdminBundle\Form\FileType::class,[
+			->add('image', FileEntityType::class,[
 			])
 
 			->add('submit', SubmitType::class, [
