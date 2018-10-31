@@ -84,44 +84,23 @@ class Post
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="seo_facebook_title", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="og_title", type="string", length=255, nullable=true)
 	 */
-	protected $seoFacebookTitle;
+	protected $ogTitle;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="seo_facebook_description", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="og_description", type="string", length=255, nullable=true)
 	 */
-	protected $seoFacebookDescription;
+	protected $ogDescription;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="seo_facebook_image", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="og_image", type="string", length=255, nullable=true)
 	 */
-	protected $seoFacebookImage;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="seo_twitter_title", type="string", length=255, nullable=true)
-	 */
-	protected $seoTwitterTitle;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="seo_twitter_description", type="string", length=255, nullable=true)
-	 */
-	protected $seoTwitterDescription;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="seo_twitter_image", type="string", length=255, nullable=true)
-	 */
-	protected $seoTwitterImage;
+	protected $ogImage;
 
 	/**
 	 * @ORM\Column(type="string", length=255, nullable=true)
@@ -346,16 +325,16 @@ class Post
 	/**
 	 * @return string
 	 */
-	public function getSeoFacebookTitle() {
-		return $this->seoFacebookTitle;
+	public function getOgTitle() {
+		return $this->ogTitle;
 	}
 
 	/**
-	 * @param string $seoFacebookTitle
+	 * @param string $ogTitle
 	 * @return Post
 	 */
-	public function setSeoFacebookTitle($seoFacebookTitle ) {
-		$this->seoFacebookTitle = $seoFacebookTitle;
+	public function setOgTitle($ogTitle ) {
+		$this->ogTitle = $ogTitle;
 
 		return $this;
 	}
@@ -363,16 +342,16 @@ class Post
 	/**
 	 * @return string
 	 */
-	public function getSeoFacebookDescription() {
-		return $this->seoFacebookDescription;
+	public function getOgDescription() {
+		return $this->ogDescription;
 	}
 
 	/**
-	 * @param string $seoFacebookDescription
+	 * @param string $ogDescription
 	 * @return Post
 	 */
-	public function setSeoFacebookDescription($seoFacebookDescription ) {
-		$this->seoFacebookDescription = $seoFacebookDescription;
+	public function setOgDescription($ogDescription ) {
+		$this->ogDescription = $ogDescription;
 
 		return $this;
 	}
@@ -380,67 +359,16 @@ class Post
 	/**
 	 * @return string
 	 */
-	public function getSeoFacebookImage() {
-		return $this->seoFacebookImage;
+	public function getOgImage() {
+		return $this->ogImage;
 	}
 
 	/**
-	 * @param string $seoFacebookImage
+	 * @param string $ogImage
 	 * @return Post
 	 */
-	public function setSeoFacebookImage($seoFacebookImage ) {
-		$this->seoFacebookImage = $seoFacebookImage;
-
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getSeoTwitterTitle() {
-		return $this->seoTwitterTitle;
-	}
-
-	/**
-	 * @param string $seoTwitterTitle
-	 * @return Post
-	 */
-	public function setSeoTwitterTitle($seoTwitterTitle ) {
-		$this->seoTwitterTitle = $seoTwitterTitle;
-
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getSeoTwitterDescription() {
-		return $this->seoTwitterDescription;
-	}
-
-	/**
-	 * @param string $seoTwitterDescription
-	 * @return Post
-	 */
-	public function setSeoTwitterDescription($seoTwitterDescription ) {
-		$this->seoTwitterDescription = $seoTwitterDescription;
-
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getSeoTwitterImage() {
-		return $this->seoTwitterImage;
-	}
-
-	/**
-	 * @param string $seoTwitterImage
-	 * @return Post
-	 */
-	public function setSeoTwitterImage($seoTwitterImage ) {
-		$this->seoTwitterImage = $seoTwitterImage;
+	public function setOgImage($ogImage ) {
+		$this->ogImage = $ogImage;
 
 		return $this;
 	}
