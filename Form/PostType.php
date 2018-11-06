@@ -9,7 +9,7 @@ namespace Octopouce\BlogBundle\Form;
 use App\Entity\Account\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Octopouce\AdminBundle\Entity\Category;
+use App\Entity\Category;
 use Octopouce\AdminBundle\Entity\File;
 use Octopouce\AdminBundle\Form\FileEntityType;
 use Octopouce\AdminBundle\Form\Type\DateTimePickerType;

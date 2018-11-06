@@ -7,7 +7,7 @@
 namespace Octopouce\BlogBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Octopouce\AdminBundle\Entity\Category;
+use App\Entity\Category;
 use Octopouce\BlogBundle\Entity\Tag;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;

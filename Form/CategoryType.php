@@ -6,7 +6,7 @@
 
 namespace Octopouce\BlogBundle\Form;
 
-use Octopouce\AdminBundle\Entity\Category;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
