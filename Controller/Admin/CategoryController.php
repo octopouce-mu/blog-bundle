@@ -6,7 +6,7 @@
 
 namespace Octopouce\BlogBundle\Controller\Admin;
 
-use App\Entity\Category;
+use Octopouce\AdminBundle\Entity\Category;
 use Octopouce\BlogBundle\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

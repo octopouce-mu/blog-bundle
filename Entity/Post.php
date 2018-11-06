@@ -5,7 +5,7 @@ namespace Octopouce\BlogBundle\Entity;
 use App\Entity\Account\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Category;
+use Octopouce\AdminBundle\Entity\Category;
 use Octopouce\AdminBundle\Entity\File;
 
 /**
@@ -115,7 +115,7 @@ class Post
 	private $user;
 
 	/**
-	 * @ORM\ManyToMany(targetEntity="App\Entity\Category")
+	 * @ORM\ManyToMany(targetEntity="Octopouce\AdminBundle\Entity\Category")
 	 * @ORM\JoinTable(name="blog_post_category",
 	 *     joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
 	 *     inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")})
