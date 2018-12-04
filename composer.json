@@ -20,5 +20,10 @@
   },
   "autoload": {
     "psr-4": { "Octopouce\\BlogBundle\\": "" }
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": "true"
+    }
   }
 }
