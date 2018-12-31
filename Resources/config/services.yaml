@@ -5,3 +5,7 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+
+    Octopouce\BlogBundle\EventListener\PostUploadListener:
+        tags:
+            - { name: doctrine.event_listener, event: postLoad }

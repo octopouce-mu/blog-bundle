@@ -15,32 +15,6 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 class PostUploadListener {
 
-	private $uploader;
-
-	public function __construct(FileUploader $uploader)
-	{
-		$this->uploader = $uploader;
-	}
-
-	public function postPersist(LifecycleEventArgs $args)
-	{
-		$entity = $args->getEntity();
-
-		if (!$entity instanceof Post) {
-			return;
-		}
-
-		$this->uploadFile($entity);
-		$entityManager = $args->getObjectManager();
-		$entityManager->flush();
-	}
-
-	public function preUpdate(PreUpdateEventArgs $args)
-	{
-		$entity = $args->getEntity();
-
-		$this->uploadFile($entity);
-	}
 
 	public function postLoad(LifecycleEventArgs $args)
 	{
@@ -57,24 +31,12 @@ class PostUploadListener {
 		} else{
 			$entity->setOgImage(null);
 		}
-	}
 
-	private function uploadFile($entity)
-	{
-		// upload only works for Post entities
-		if (!$entity instanceof Post) {
-			return;
+		$thumbnail = $entity->getThumbnail();
+		if ($thumbnail && file_exists($thumbnail)) {
+			$entity->setThumbnail(new File($thumbnail));
+		} else{
+			$entity->setThumbnail(null);
 		}
-
-		$ogImage = $entity->getOgImage();
-
-		// only upload new files
-		if ($ogImage instanceof UploadedFile) {
-			$imgName = $this->uploader->upload($ogImage, $entity->getId());
-			$entity->setOgImage($imgName);
-		} elseif($ogImage instanceof File){
-			$entity->setOgImage($ogImage->getFilename());
-		}
-
 	}
 }
