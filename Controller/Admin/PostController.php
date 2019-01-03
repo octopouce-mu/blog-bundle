@@ -88,7 +88,7 @@ class PostController extends Controller
 
 		$form = $this->createForm(PostType::class, $post);
 
-		$imgOld = $post->getImage();
+		$imgOld = $post->getImage() ? $post->getImage()->getPath()->getPathName() : null;
 		$oldThumbnail = $post->getThumbnail();
 
 
@@ -106,20 +106,18 @@ class PostController extends Controller
 				$post->setThumbnail($oldThumbnail instanceof File ? $oldThumbnail->getPathName() : $oldThumbnail);
 			}
 
-			if($post->getImage()) {
-				if($imgOld && $imgOld->getPath() instanceof File) $fileSystem->remove($imgOld);
-
+			if($post->getImage() && $post->getImage()->getPath()) {
 				$nameImage = $fileUploader->upload($post->getImage()->getPath(), 'date', 'post-'.$post->getSlug());
 				$post->getImage()->setPath($nameImage);
 			} else {
-				$post->getImage()->setPath($imgOld->getPath() instanceof File ? $imgOld->getPath()->getPathName() : $imgOld->getPath());
+				$post->getImage()->setPath($imgOld);
 			}
 
 			$this->getDoctrine()->getManager()->flush();
 
 			$this->addFlash('success', 'post.edited');
 
-			return $this->redirectToRoute('octopouce_blog_admin_post_show', ['post' => $post->getId()]);
+			return $this->redirectToRoute('octopouce_blog_admin_post_edit', ['post' => $post->getId()]);
 		}
 
 		return $this->render('@OctopouceBlog/Admin/Post/edit.html.twig', [
