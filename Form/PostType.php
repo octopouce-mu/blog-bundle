@@ -14,6 +14,7 @@ use Octopouce\AdminBundle\Entity\File;
 use Octopouce\AdminBundle\Form\FileEntityType;
 use Octopouce\AdminBundle\Form\Type\DateTimePickerType;
 use Octopouce\AdminBundle\Form\Type\SwitchType;
+use Octopouce\AdminBundle\Form\Type\TranslationsType;
 use Octopouce\BlogBundle\Entity\Post;
 use Octopouce\BlogBundle\Entity\Tag;
 use Octopouce\BlogBundle\EventListener\PostFormListener;
@@ -116,6 +117,9 @@ class PostType extends AbstractType
 			->add('thumbnail', FileType::class,[
 				'required' => false
 			])
+
+			->add('translations', TranslationsType::class)
+
 
 			->add('submit', SubmitType::class, [
 				'label' => 'save',

@@ -6,6 +6,7 @@
 
 namespace Octopouce\BlogBundle\Form;
 
+use Octopouce\AdminBundle\Form\Type\TranslationsType;
 use Octopouce\BlogBundle\Entity\Tag;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -23,6 +24,7 @@ class TagType extends AbstractType
 			->add('slug', TextType::class, [
 				'attr' => ['placeholder' => '']
 			])
+			->add('translations', TranslationsType::class)
 
 			->add('submit', SubmitType::class, [
 				'label' => 'save',

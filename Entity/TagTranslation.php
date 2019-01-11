@@ -7,21 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * @ORM\Table(name="blog_tag")
+ * @ORM\Table(name="blog_tag_translation")
  * @ORM\Entity()
  */
-class Tag
+class TagTranslation
 {
-	use ORMBehaviors\Translatable\Translatable;
-
-	/**
-	 * @var int
-	 *
-	 * @ORM\Column(name="id", type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	protected $id;
+	use ORMBehaviors\Translatable\Translation;
 
 	/**
 	 * @var string
@@ -42,21 +33,11 @@ class Tag
 	}
 
 	/**
-	 * Get id
-	 *
-	 * @return int
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
-
-	/**
 	 * Set name
 	 *
 	 * @param string $name
 	 *
-	 * @return Tag
+	 * @return TagTranslation
 	 */
 	public function setName($name)
 	{
@@ -80,7 +61,7 @@ class Tag
 	 *
 	 * @param string $slug
 	 *
-	 * @return Tag
+	 * @return TagTranslation
 	 */
 	public function setSlug($slug)
 	{

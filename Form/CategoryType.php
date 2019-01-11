@@ -7,6 +7,7 @@
 namespace Octopouce\BlogBundle\Form;
 
 use Octopouce\AdminBundle\Entity\Category;
+use Octopouce\AdminBundle\Form\Type\TranslationsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,6 +24,7 @@ class CategoryType extends AbstractType
 			->add('slug', TextType::class, [
 				'attr' => ['placeholder' => '']
 			])
+			->add('translations', TranslationsType::class)
 
 			->add('submit', SubmitType::class, [
 				'label' => 'save',

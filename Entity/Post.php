@@ -7,15 +7,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Octopouce\AdminBundle\Entity\Category;
 use Octopouce\AdminBundle\Entity\File;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * Ad
- *
  * @ORM\Table(name="blog_post")
  * @ORM\Entity(repositoryClass="Octopouce\BlogBundle\Repository\PostRepository")
  */
 class Post
 {
+	use ORMBehaviors\Translatable\Translatable;
+
 	/**
 	 * @var int
 	 *
