@@ -1,6 +1,6 @@
 <?php
 
-namespace Octopouce\CmsBundle\Entity;
+namespace Octopouce\BlogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
