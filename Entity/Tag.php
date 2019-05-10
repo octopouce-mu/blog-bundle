@@ -5,6 +5,7 @@ namespace Octopouce\BlogBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Octopouce\AdminBundle\Translatable\Translatable;
 
 /**
  * @ORM\Table(name="blog_tag")
@@ -12,7 +13,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  */
 class Tag
 {
-	use ORMBehaviors\Translatable\Translatable;
+	use Translatable;
 
 	/**
 	 * @var int

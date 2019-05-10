@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Octopouce\AdminBundle\Entity\Category;
 use Octopouce\AdminBundle\Entity\File;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Octopouce\AdminBundle\Translatable\Translatable;
 
 /**
  * @ORM\Table(name="blog_post")
@@ -15,7 +16,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  */
 class Post
 {
-	use ORMBehaviors\Translatable\Translatable;
+	use Translatable;
 
 	/**
 	 * @var int
